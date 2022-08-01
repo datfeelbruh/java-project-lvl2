@@ -4,6 +4,8 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.util.concurrent.Callable;
+
 @Command(
         name = "gendiff",
         mixinStandardHelpOptions = true,
@@ -11,7 +13,7 @@ import picocli.CommandLine.Parameters;
 )
 
 
-public class App implements Runnable {
+public class App implements Callable {
     @Option(
             names = {"-f", "--format"},
             description = "output format [default: stylish]",
@@ -38,8 +40,7 @@ public class App implements Runnable {
     }
 
     @Override
-    public void run() {
-        Differ.generate();
+    public Object call() throws Exception {
+        return Differ.generate(filepath1, filepath2);
     }
-
 }
