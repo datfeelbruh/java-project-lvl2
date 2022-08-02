@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
+//CHECKSTYLE:OFF
 public class DifferTest {
     String absolutePathFile1;
     String absolutePathFile2;
@@ -35,4 +35,5 @@ public class DifferTest {
         String actual = Differ.generate(absolutePathFile1, absolutePathFile2);
         Assertions.assertEquals(actual, expected);
     }
+    //CHECKSTYLE:ON
 }
