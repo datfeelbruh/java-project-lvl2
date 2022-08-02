@@ -26,8 +26,6 @@ public class Differ {
 
         Map<String, Object> firstMap = objectMapper.readValue(firstJson, new TypeReference<>() { });
         Map<String, Object> secondMap = objectMapper.readValue(secondJson, new TypeReference<>() { });
-
-        System.out.println(diff(firstMap, secondMap));
         return genDiff(diff(firstMap, secondMap));
     }
     private static List<String> diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
@@ -36,18 +34,16 @@ public class Differ {
         allKeySet.addAll(firstMap.keySet());
         allKeySet.addAll(secondMap.keySet());
         for (String key : allKeySet) {
-            if (firstMap.containsKey(key) && secondMap.containsKey(key)) {
-                if (firstMap.get(key).equals(secondMap.get(key))) {
-                    difference.add("  " + key + ":" + " " + firstMap.get(key));
-                } else {
-                    difference.add("- " + key + ":" + " " + firstMap.get(key));
-                    difference.add("+ " + key + ":" + " " + secondMap.get(key));
-                }
+            if (!firstMap.containsKey(key)) {
+                difference.add("+ " + key + ":" + " " + secondMap.get(key));
+            } else if (!secondMap.containsKey(key)) {
+                difference.add("- " + key + ":" + " " + firstMap.get(key));
             } else {
-                if (firstMap.containsKey(key) && !secondMap.containsKey(key)) {
+                if (!firstMap.get(key).equals(secondMap.get(key))) {
                     difference.add("- " + key + ":" + " " + firstMap.get(key));
-                } else if (!firstMap.containsKey(key) && secondMap.containsKey(key)) {
                     difference.add("+ " + key + ":" + " " + secondMap.get(key));
+                } else {
+                    difference.add("  " + key + ":" + " " + secondMap.get(key));
                 }
             }
         }
