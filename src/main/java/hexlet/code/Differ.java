@@ -58,7 +58,7 @@ public class Differ {
             sb.append(elem);
             sb.append("\n");
         }
-        sb.append("}");
+        sb.append("}\n");
         return sb.toString();
     }
 }
