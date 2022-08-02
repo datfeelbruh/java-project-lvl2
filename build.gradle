@@ -4,10 +4,6 @@ plugins {
     id 'checkstyle'
 }
 
-checkstyle {
-    configFile = rootProject.file('config/checkstyle.xml')
-}
-
 application {
     mainClass = 'hexlet.code.App'
 }
