@@ -26,12 +26,6 @@ public class Differ {
         System.out.println(diff(firstMap, secondMap));
         return diff(firstMap, secondMap);
     }
-    /*
-    - удален во втором
-    + добавлен во втором
-     неизменен во втором
-    - в первом и + во втором = изменен во втором нужно вывести обе пары подряд
-     */
     private static String diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
         List<String> difference = new LinkedList<>();
         Set<String> allKeySet = new TreeSet<>();
@@ -39,19 +33,15 @@ public class Differ {
         allKeySet.addAll(secondMap.keySet());
         for (String key : allKeySet) {
             if (firstMap.containsKey(key) && secondMap.containsKey(key)) {
-                // Неизменен
                 if (firstMap.get(key).equals(secondMap.get(key))) {
                     difference.add("  " + key + ":" + " " + firstMap.get(key));
-                    // Изменен во втором обе пары в линкедмап
                 } else {
                     difference.add("- " + key + ":" + " " + firstMap.get(key));
                     difference.add("+ " + key + ":" + " " + secondMap.get(key));
                 }
             } else {
-                // Есть в первом удален во втором
                 if (firstMap.containsKey(key) && !secondMap.containsKey(key)) {
                     difference.add("- " + key + ":" + " " + firstMap.get(key));
-                    // Нет в первом добавлен во втором
                 } else if (!firstMap.containsKey(key) && secondMap.containsKey(key)) {
                     difference.add("+ " + key + ":" + " " + secondMap.get(key));
                 }
