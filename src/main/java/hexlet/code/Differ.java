@@ -26,39 +26,41 @@ public class Differ {
 
         Map<String, Object> firstMap = objectMapper.readValue(firstJson, new TypeReference<>() { });
         Map<String, Object> secondMap = objectMapper.readValue(secondJson, new TypeReference<>() { });
-        return genDiff(diff(firstMap, secondMap));
+        System.out.println(diff(firstMap, secondMap));
+        return diff(firstMap, secondMap);
     }
-    private static List<String> diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
-        List<String> difference = new LinkedList<>();
+    private static String diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
+        StringBuilder resultBuilder = new StringBuilder();
         Set<String> allKeySet = new TreeSet<>();
         allKeySet.addAll(firstMap.keySet());
         allKeySet.addAll(secondMap.keySet());
         for (String key : allKeySet) {
             if (!firstMap.containsKey(key)) {
-                difference.add("+ " + key + ":" + " " + secondMap.get(key));
+                String value = "+ " + key + ":" + " " + secondMap.get(key);
+                genDiff(value, resultBuilder);
             } else if (!secondMap.containsKey(key)) {
-                difference.add("- " + key + ":" + " " + firstMap.get(key));
+                String value = "- " + key + ":" + " " + firstMap.get(key);
+                genDiff(value, resultBuilder);
             } else {
                 if (!firstMap.get(key).equals(secondMap.get(key))) {
-                    difference.add("- " + key + ":" + " " + firstMap.get(key));
-                    difference.add("+ " + key + ":" + " " + secondMap.get(key));
+                    String value = "- " + key + ":" + " " + firstMap.get(key);
+                    genDiff(value, resultBuilder);
+                    value = "+ " + key + ":" + " " + secondMap.get(key);
+                    genDiff(value, resultBuilder);
                 } else {
-                    difference.add("  " + key + ":" + " " + secondMap.get(key));
+                    String value = "  " + key + ":" + " " + secondMap.get(key);
+                    genDiff(value, resultBuilder);
                 }
             }
         }
-        return difference;
+        resultBuilder.insert(0, "{\n");
+        resultBuilder.insert(resultBuilder.length() - 1, "\n}");
+        return resultBuilder.toString();
     }
 
-    private static String genDiff(List<String> difference) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\n");
-        for (String elem : difference) {
-            sb.append("  ");
-            sb.append(elem);
-            sb.append("\n");
-        }
-        sb.append("}");
-        return sb.toString();
+    private static void genDiff(String value, StringBuilder builder) {
+        builder.append("  ");
+        builder.append(value);
+        builder.append("\n");
     }
 }
