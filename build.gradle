@@ -1,6 +1,11 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+}
+
+checkstyle {
+    configFile = rootProject.file('config/checkstyle.xml')
 }
 
 application {

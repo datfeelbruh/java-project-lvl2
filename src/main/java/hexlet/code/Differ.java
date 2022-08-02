@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.Set;
+import java.util.LinkedList;
+import java.util.TreeSet;
 
 
 public class Differ {
@@ -20,13 +24,13 @@ public class Differ {
         String secondJson = String.join("", secondFileLines);
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Map<String, Object> firstMap = objectMapper.readValue(firstJson, new TypeReference<>() {});
-        Map<String, Object> secondMap = objectMapper.readValue(secondJson, new TypeReference<>() {});
+        Map<String, Object> firstMap = objectMapper.readValue(firstJson, new TypeReference<>() { });
+        Map<String, Object> secondMap = objectMapper.readValue(secondJson, new TypeReference<>() { });
 
         System.out.println(diff(firstMap, secondMap));
-        return diff(firstMap, secondMap);
+        return genDiff(diff(firstMap, secondMap));
     }
-    private static String diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
+    private static List<String> diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
         List<String> difference = new LinkedList<>();
         Set<String> allKeySet = new TreeSet<>();
         allKeySet.addAll(firstMap.keySet());
@@ -47,6 +51,10 @@ public class Differ {
                 }
             }
         }
+        return difference;
+    }
+
+    private static String genDiff(List<String> difference) {
         StringBuilder sb = new StringBuilder();
         sb.append("{\n");
         for (String elem : difference) {
