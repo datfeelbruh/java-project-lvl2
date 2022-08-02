@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
 )
 
 
-public class App implements Callable {
+public class App implements Callable<Object> {
     @Option(
             names = {"-f", "--format"},
             description = "output format [default: stylish]",
