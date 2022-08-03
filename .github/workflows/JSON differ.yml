@@ -32,11 +32,11 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
-    - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{secrets.TEST_COVERAGE}}
-          JACOCO_SOURCE_PATH: src/main/java
-        with:
-          coverageCommand: make test
-          coverageLocations: ${{github.workspace}}/build/customJacocoReportDir/test/jacocoTestReport.xml:jacoco
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v3.0.0
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CODE_CLIMATE_ID}}
+        JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
+      with:
+        coverageCommand: make test
+        coverageLocations: ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
