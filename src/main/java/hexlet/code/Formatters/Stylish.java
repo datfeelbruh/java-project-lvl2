@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Stylish {
-    public static String toFormat(Map<String, Pair> diff) {
+    public static String toFormat(Map<String, Pair> diff) throws Exception {
         Set<String> allKeys = new TreeSet<>(diff.keySet());
         StringBuilder stylishBuilder = new StringBuilder();
         stylishBuilder.append("{\n");
@@ -46,11 +46,14 @@ public class Stylish {
                     stylishBuilder.append(value);
                 }
                 case ("unchanged") -> {
+                    //CHECKSTYLE:OFF
                     stylishBuilder.append(" ".repeat(4));
+                    //CHECKSTYLE:ON
                     stylishBuilder.append(key);
                     stylishBuilder.append(": ");
                     stylishBuilder.append(value);
                 }
+                default -> throw new Exception("Modification json(yml) field not found");
             }
             stylishBuilder.append("\n");
         }

@@ -1,15 +1,16 @@
 package hexlet.code;
 
-public class Pair {
+public final class Pair {
     private final Object value;
     private final Object oldValue;
     private final String modification;
 
-    Pair(Object value, Object oldValue, String modification) {
-        this.value = value;
-        this.oldValue = oldValue;
-        this.modification = modification;
+    public Pair(Object firstFieldValue, Object secondFieldValue, String modificationStatus) {
+        this.value = firstFieldValue;
+        this.oldValue = secondFieldValue;
+        this.modification = modificationStatus;
     }
+
 
     public String getModification() {
         return modification;

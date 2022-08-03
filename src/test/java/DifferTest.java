@@ -1,7 +1,6 @@
 import hexlet.code.Differ;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -25,7 +24,7 @@ public class DifferTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"json", "yml"})
-    public void testGenerateDifference(String format) throws IOException {
+    public void testGenerateDifference(String format) throws Exception {
         Path file1 = Paths.get("src", "test", "resources", "file1." + format);
         Path file2 = Paths.get("src", "test", "resources", "file2." + format);
         String absolutePathFile1 = file1.toFile().getAbsolutePath();
