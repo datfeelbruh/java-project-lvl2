@@ -13,11 +13,11 @@ public class DifferTest {
     String absolutePathFile1;
     String absolutePathFile2;
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach() throws IOException {
         Path file1 = Paths.get("src", "test", "resources", "file1.json");
         Path file2 = Paths.get("src", "test", "resources", "file2.json");
-        absolutePathFile1 = file1.toFile().getAbsolutePath();
-        absolutePathFile2 = file2.toFile().getAbsolutePath();
+        absolutePathFile1 = file1.toFile().getCanonicalPath();
+        absolutePathFile2 = file2.toFile().getCanonicalPath();
     }
 
     @Test
