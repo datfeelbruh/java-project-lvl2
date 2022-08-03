@@ -6,26 +6,22 @@ clean:
 build:
 	./gradlew clean build
 
-install:
+install-dist:
 	./gradlew clean install
 
 run-dist:
 	./build/install/java-package/bin/java-package
 
-run:
-	./gradlew run
+lint:
+	./gradlew checkstyleMain
+	./gradlew checkstyleTest
 
 test:
 	./gradlew test
 
-report:
+report: test
 	./gradlew jacocoTestReport
 
-lint:
-	./gradlew checkstyleMain checkstyleTest
-
-update-deps:
-	./gradlew useLatestVersions
 
 
 build-run: build run
