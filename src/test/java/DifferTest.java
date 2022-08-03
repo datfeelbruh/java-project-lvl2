@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 //CHECKSTYLE:OFF
-public class DifferTest {
+public final class DifferTest {
     private static String stylishResult;
     private static String plainResult;
     private static String jsonResult;
