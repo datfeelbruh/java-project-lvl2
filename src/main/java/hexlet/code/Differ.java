@@ -1,12 +1,6 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.List;
 import java.util.Set;
@@ -16,16 +10,8 @@ import java.util.TreeSet;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2) throws IOException {
-        Path firstFilepath = Paths.get(filepath1).toAbsolutePath();
-        Path secondFilepath = Paths.get(filepath2).toAbsolutePath();
-        List<String> firstFileLines = Files.readAllLines(firstFilepath);
-        List<String> secondFileLines = Files.readAllLines(secondFilepath);
-        String firstJson = String.join("", firstFileLines);
-        String secondJson = String.join("", secondFileLines);
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        Map<String, Object> firstMap = objectMapper.readValue(firstJson, new TypeReference<>() { });
-        Map<String, Object> secondMap = objectMapper.readValue(secondJson, new TypeReference<>() { });
+        Map<String, Object> firstMap = Parser.parse(filepath1);
+        Map<String, Object> secondMap = Parser.parse(filepath2);
         return genDiff(diff(firstMap, secondMap));
     }
     private static List<String> diff(Map<String, Object> firstMap, Map<String, Object> secondMap) {

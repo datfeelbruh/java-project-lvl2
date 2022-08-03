@@ -22,12 +22,14 @@ public class App implements Callable<Object> {
     String format = "stylish";
 
     @Parameters(
+            index = "0",
             paramLabel = "filepath1",
             description = "path to first file"
     )
     String filepath1;
 
     @Parameters(
+            index = "1",
             paramLabel = "filepath2",
             description = "path to second file"
     )
@@ -41,7 +43,9 @@ public class App implements Callable<Object> {
 
     @Override
     public Object call() throws Exception {
-        return Differ.generate(filepath1, filepath2);
+        String result = Differ.generate(filepath1, filepath2);
+        System.out.println(result);
+        return 0;
     }
     //CHECKSTYLE:ON
 }
