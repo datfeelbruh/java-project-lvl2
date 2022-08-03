@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.util.Map;
 
 
-public class Differ {
+public final class Differ {
     public static String generate(String firstFile, String secondFile) throws Exception {
         return Differ.generate(firstFile, secondFile, "stylish");
     }
