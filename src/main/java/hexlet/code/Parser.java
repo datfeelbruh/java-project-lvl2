@@ -4,31 +4,18 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 
 public class Parser {
-    public static Map<String, Object> parse(String filename) throws IOException {
-        return getFileType(filename);
-    }
-
-    private static Map<String, Object> getFileType(String filename) throws IOException {
-        Path firstFilepath = Paths.get(filename).toAbsolutePath();
-        List<String> fileLines = Files.readAllLines(firstFilepath);
+    public static Map<String, Object> getFileContent(String filename, String format) throws Exception {
         ObjectMapper objectMapper;
-        if (filename.endsWith("json")) {
+        if (format.equals("json")) {
             objectMapper = new ObjectMapper(new JsonFactory());
-            String json = String.join("", fileLines);
-            return objectMapper.readValue(json, new TypeReference<>() { });
-        } else {
+        } else if (format.equals("yml")) {
             objectMapper = new ObjectMapper(new YAMLFactory());
-            String yml = String.join("", fileLines);
-            return objectMapper.readValue(yml, new TypeReference<>() { });
+        } else {
+            throw new Exception("Unknown file format " + format);
         }
+        return objectMapper.readValue(filename, new TypeReference<>() { });
     }
 }

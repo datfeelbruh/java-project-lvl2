@@ -1,12 +1,22 @@
 package hexlet.code;
 
-import hexlet.code.Formatters.Stylish;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Map;
 
 
 public class Differ {
-    public static String generate(String filepath1, String filepath2) throws Exception {
-        Map<String, Pair> diff = Comparator.genDiff(Parser.parse(filepath1), Parser.parse(filepath2));
-        return Stylish.toFormat(diff);
+    public static String generate(String firstFile, String secondFile) throws Exception {
+        return Differ.generate(firstFile, secondFile, "stylish");
+    }
+    public static String generate(String firstFile, String secondFile, String outputFormat) throws Exception {
+        String format1 = firstFile.substring(firstFile.lastIndexOf(".") + 1);
+        String format2 = secondFile.substring(secondFile.lastIndexOf(".") + 1);
+        String firstFileData = Files.readString(new File(firstFile).toPath());
+        String secondFileData = Files.readString(new File(secondFile).toPath());
+        Map<String, Object> firstData = Parser.getFileContent(firstFileData, format1);
+        Map<String, Object> secondData = Parser.getFileContent(secondFileData, format2);
+        Map<String, Pair> diff = Comparator.genDiff(firstData, secondData);
+        return Formatter.getOutputFormat(diff, outputFormat);
     }
 }

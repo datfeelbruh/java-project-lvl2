@@ -14,13 +14,6 @@ import java.util.concurrent.Callable;
 
 //CHECKSTYLE:OFF
 public class App implements Callable<Object> {
-    @Option(
-            names = {"-f", "--format"},
-            description = "output format [default: stylish]",
-            defaultValue = "stylish"
-    )
-    String format;
-
     @Parameters(
             index = "0",
             paramLabel = "filepath1",
@@ -35,6 +28,13 @@ public class App implements Callable<Object> {
     )
     String filepath2;
 
+    @Option(
+            names = {"-f", "--format"},
+            description = "output format [default: ${DEFAULT_VALUE}]",
+            defaultValue = "stylish"
+    )
+    String format;
+
 
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
@@ -43,7 +43,7 @@ public class App implements Callable<Object> {
 
     @Override
     public Object call() throws Exception {
-        String result = Differ.generate(filepath1, filepath2);
+        String result = Differ.generate(filepath1, filepath2, format);
         System.out.println(result);
         return 0;
     }

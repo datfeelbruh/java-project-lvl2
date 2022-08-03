@@ -11,6 +11,13 @@ public final class Pair {
         this.modification = modificationStatus;
     }
 
+    public Object getValue() {
+        return value;
+    }
+
+    public Object getOldValue() {
+        return oldValue;
+    }
 
     public String getModification() {
         return modification;
