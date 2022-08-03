@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-//CHECKSTYLE:OFF
 public final class DifferTest {
     private static String stylishResult;
     private static String plainResult;
@@ -68,5 +67,4 @@ public final class DifferTest {
         );
         Assertions.assertEquals("Unsupported output format: hxlt", thrown.getMessage());
     }
-//    //CHECKSTYLE:ON
 }
