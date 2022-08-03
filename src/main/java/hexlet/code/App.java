@@ -19,7 +19,7 @@ public class App implements Callable<Object> {
             description = "output format [default: stylish]",
             defaultValue = "stylish"
     )
-    String format = "stylish";
+    String format;
 
     @Parameters(
             index = "0",
