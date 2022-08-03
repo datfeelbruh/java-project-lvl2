@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.Formatters.Json;
 import hexlet.code.Formatters.Plain;
 import hexlet.code.Formatters.Stylish;
 
@@ -10,7 +11,8 @@ public class Formatter {
         return switch (outputFormat) {
             case ("stylish") -> Stylish.toFormat(result);
             case ("plain") -> Plain.toFormat(result);
-            default -> throw new Exception("Unsupported output format");
+            case ("json") -> Json.toFormat(result);
+            default -> throw new Exception("Unsupported output format: " + outputFormat);
         };
     }
 }

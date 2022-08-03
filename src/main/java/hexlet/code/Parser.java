@@ -14,7 +14,7 @@ public class Parser {
         } else if (format.equals("yml")) {
             objectMapper = new ObjectMapper(new YAMLFactory());
         } else {
-            throw new Exception("Unknown file format " + format);
+            throw new Exception("Unknown file format: " + format);
         }
         return objectMapper.readValue(filename, new TypeReference<>() { });
     }
