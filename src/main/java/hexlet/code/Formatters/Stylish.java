@@ -46,9 +46,8 @@ public class Stylish {
                     stylishBuilder.append(value);
                 }
                 case ("unchanged") -> {
-                    //CHECKSTYLE:OFF
-                    stylishBuilder.append(" ".repeat(4));
-                    //CHECKSTYLE:ON
+                    stylishBuilder.append(" ".repeat(2));
+                    stylishBuilder.append(" ".repeat(2));
                     stylishBuilder.append(key);
                     stylishBuilder.append(": ");
                     stylishBuilder.append(value);

@@ -12,28 +12,27 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference."
 )
 
-//CHECKSTYLE:OFF
-public class App implements Callable<Object> {
+public final class App implements Callable<Object> {
     @Parameters(
             index = "0",
             paramLabel = "filepath1",
             description = "path to first file"
     )
-    String filepath1;
+    private String filepath1;
 
     @Parameters(
             index = "1",
             paramLabel = "filepath2",
             description = "path to second file"
     )
-    String filepath2;
+    private String filepath2;
 
     @Option(
             names = {"-f", "--format"},
             description = "output format [default: ${DEFAULT_VALUE}]",
             defaultValue = "stylish"
     )
-    String format;
+    private String format;
 
 
     public static void main(String[] args) {
@@ -47,5 +46,4 @@ public class App implements Callable<Object> {
         System.out.println(result);
         return 0;
     }
-    //CHECKSTYLE:ON
 }
