@@ -4,24 +4,42 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.HashMap;
 
 public class Comparator {
-    public static Map<String, Pair> genDiff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
+    private static final String ADDED = "added";
+    private static final String DELETED = "deleted";
+    private static final String CHANGED = "changed";
+    private static final String UNCHANGED = "unchanged";
+    public static Map<String, Map<String, Object>> genDiff(Map<String, Object> map1, Map<String, Object> map2) {
         Set<String> allKeySet = new TreeSet<>();
-        allKeySet.addAll(firstMap.keySet());
-        allKeySet.addAll(secondMap.keySet());
-        Map<String, Pair> comparingResult = new LinkedHashMap<>();
+        allKeySet.addAll(map1.keySet());
+        allKeySet.addAll(map2.keySet());
+        Map<String, Map<String, Object>> comparingResult = new LinkedHashMap<>();
         for (String key : allKeySet) {
-            Object firstValue = firstMap.get(key);
-            Object secondValue = secondMap.get(key);
-            if (!secondMap.containsKey(key)) {
-                comparingResult.put(key, new Pair(firstValue, null, "deleted"));
-            } else if (!firstMap.containsKey(key)) {
-                comparingResult.put(key, new Pair(secondValue, null, "added"));
+            Object firstValue = map1.get(key);
+            Object secondValue = map2.get(key);
+            Map<String, Object> valuesStatus = new HashMap<>();
+            if (!map2.containsKey(key)) {
+                valuesStatus.put("value", firstValue);
+                valuesStatus.put("newValue", secondValue);
+                valuesStatus.put("modification", DELETED);
+                comparingResult.put(key, valuesStatus);
+
+            } else if (!map1.containsKey(key)) {
+                valuesStatus.put("value", firstValue);
+                valuesStatus.put("newValue", secondValue);
+                valuesStatus.put("modification", ADDED);
+                comparingResult.put(key, valuesStatus);
             } else if (!compareValues(firstValue, secondValue)) {
-                comparingResult.put(key, new Pair(secondValue, firstValue, "changed"));
+                valuesStatus.put("value", firstValue);
+                valuesStatus.put("newValue", secondValue);
+                valuesStatus.put("modification", CHANGED);
+                comparingResult.put(key, valuesStatus);
             } else {
-                comparingResult.put(key, new Pair(secondValue, null, "unchanged"));
+                valuesStatus.put("value", firstValue);
+                valuesStatus.put("modification", UNCHANGED);
+                comparingResult.put(key, valuesStatus);
             }
         }
         return comparingResult;

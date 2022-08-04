@@ -9,12 +9,14 @@ import java.util.Map;
 public class Parser {
     public static Map<String, Object> getFileContent(String filename, String format) throws Exception {
         ObjectMapper objectMapper;
-        if (format.equals("json")) {
-            objectMapper = new ObjectMapper(new JsonFactory());
-        } else if (format.equals("yml")) {
-            objectMapper = new ObjectMapper(new YAMLFactory());
-        } else {
-            throw new Exception("Unknown file format: " + format);
+        switch (format) {
+            case ("json") -> {
+                objectMapper = new ObjectMapper(new JsonFactory());
+            }
+            case ("yml") -> {
+                objectMapper = new ObjectMapper(new YAMLFactory());
+            }
+            default -> throw new Exception("Unknown file format: " + format);
         }
         return objectMapper.readValue(filename, new TypeReference<>() { });
     }

@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 
@@ -12,11 +13,11 @@ public final class Differ {
     public static String generate(String firstFile, String secondFile, String outputFormat) throws Exception {
         String format1 = firstFile.substring(firstFile.lastIndexOf(".") + 1);
         String format2 = secondFile.substring(secondFile.lastIndexOf(".") + 1);
-        String firstFileData = Files.readString(new File(firstFile).toPath());
+        String firstFileData = Files.readString(Path.of(new File(firstFile).getAbsolutePath()));
         String secondFileData = Files.readString(new File(secondFile).toPath());
         Map<String, Object> firstData = Parser.getFileContent(firstFileData, format1);
         Map<String, Object> secondData = Parser.getFileContent(secondFileData, format2);
-        Map<String, Pair> diff = Comparator.genDiff(firstData, secondData);
+        Map<String, Map<String, Object>> diff = Comparator.genDiff(firstData, secondData);
         return Formatter.getOutputFormat(diff, outputFormat);
     }
 }

@@ -1,22 +1,21 @@
-package hexlet.code.Formatters;
+package hexlet.code.formatters;
 
-import hexlet.code.Pair;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.List;
 
 public class Plain {
-    public static String toFormat(Map<String, Pair> diff) throws Exception {
+    public static String formatting(Map<String, Map<String, Object>> diff) throws Exception {
         Set<String> allKeys = new TreeSet<>(diff.keySet());
         StringBuilder plainBuilder = new StringBuilder();
 
         for (String key : allKeys) {
-            String mod = diff.get(key).getModification();
+            String mod = (String) diff.get(key).get("modification");
             String keyFormatted = "'" + key + "'";
-            String value = getPlainValue(diff.get(key).getValue());
-            String oldValue = getPlainValue(diff.get(key).getOldValue());
+            String value = getPlainValue(diff.get(key).get("value"));
+            String newValue = getPlainValue(diff.get(key).get("newValue"));
             switch (mod) {
                 case ("deleted") -> {
                     plainBuilder.append("Property ");
@@ -28,16 +27,16 @@ public class Plain {
                     plainBuilder.append("Property ");
                     plainBuilder.append(keyFormatted);
                     plainBuilder.append(" was added with value: ");
-                    plainBuilder.append(value);
+                    plainBuilder.append(newValue);
                     plainBuilder.append("\n");
                 }
                 case ("changed") -> {
                     plainBuilder.append("Property ");
                     plainBuilder.append(keyFormatted);
                     plainBuilder.append(" was updated. From ");
-                    plainBuilder.append(oldValue);
-                    plainBuilder.append(" to ");
                     plainBuilder.append(value);
+                    plainBuilder.append(" to ");
+                    plainBuilder.append(newValue);
                     plainBuilder.append("\n");
                 }
                 case ("unchanged") -> { }
@@ -51,7 +50,7 @@ public class Plain {
         if (value == null) {
             return null;
         }
-        if (value instanceof ArrayList<?> || value instanceof Map<?, ?>) {
+        if (value instanceof List<?> || value instanceof Map<?, ?>) {
             return "[complex value]";
         }
         if (value instanceof String) {

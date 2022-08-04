@@ -1,21 +1,20 @@
-package hexlet.code.Formatters;
+package hexlet.code.formatters;
 
-import hexlet.code.Pair;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Stylish {
-    public static String toFormat(Map<String, Pair> diff) throws Exception {
+    public static String formatting(Map<String, Map<String, Object>> diff) throws Exception {
         Set<String> allKeys = new TreeSet<>(diff.keySet());
         StringBuilder stylishBuilder = new StringBuilder();
         stylishBuilder.append("{\n");
 
         for (String key : allKeys) {
-            Object value = diff.get(key).getStringValue();
-            Object oldValue = diff.get(key).getStringOldValue();
-            String mod = diff.get(key).getModification();
+            Object value = diff.get(key).get("value");
+            Object newValue = diff.get(key).get("newValue");
+            String mod = (String) diff.get(key).get("modification");
 
             switch (mod) {
                 case ("deleted") -> {
@@ -30,20 +29,20 @@ public class Stylish {
                     stylishBuilder.append("+ ");
                     stylishBuilder.append(key);
                     stylishBuilder.append(": ");
-                    stylishBuilder.append(value);
+                    stylishBuilder.append(newValue);
                 }
                 case ("changed") -> {
                     stylishBuilder.append(" ".repeat(2));
                     stylishBuilder.append("- ");
                     stylishBuilder.append(key);
                     stylishBuilder.append(": ");
-                    stylishBuilder.append(oldValue);
+                    stylishBuilder.append(value);
                     stylishBuilder.append("\n");
                     stylishBuilder.append(" ".repeat(2));
                     stylishBuilder.append("+ ");
                     stylishBuilder.append(key);
                     stylishBuilder.append(": ");
-                    stylishBuilder.append(value);
+                    stylishBuilder.append(newValue);
                 }
                 case ("unchanged") -> {
                     stylishBuilder.append(" ".repeat(2));

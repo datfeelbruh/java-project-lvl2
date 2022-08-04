@@ -1,18 +1,18 @@
 package hexlet.code;
 
-import hexlet.code.Formatters.Json;
-import hexlet.code.Formatters.Plain;
-import hexlet.code.Formatters.Stylish;
+import hexlet.code.formatters.Json;
+import hexlet.code.formatters.Plain;
+import hexlet.code.formatters.Stylish;
 
 import java.util.Map;
 
 public class Formatter {
-    public static String getOutputFormat(Map<String, Pair> result, String outputFormat) throws Exception {
-        return switch (outputFormat) {
-            case ("stylish") -> Stylish.toFormat(result);
-            case ("plain") -> Plain.toFormat(result);
-            case ("json") -> Json.toFormat(result);
-            default -> throw new Exception("Unsupported output format: " + outputFormat);
+    public static String getOutputFormat(Map<String, Map<String, Object>> result, String outFormat) throws Exception {
+        return switch (outFormat) {
+            case ("stylish") -> Stylish.formatting(result);
+            case ("plain") -> Plain.formatting(result);
+            case ("json") -> Json.formatting(result);
+            default -> throw new Exception("Unsupported output format: " + outFormat);
         };
     }
 }

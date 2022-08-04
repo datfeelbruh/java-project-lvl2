@@ -27,7 +27,6 @@ public final class DifferTest {
         jsonResult = Files.readString(new File("src/test/resources/jsonResult.json").toPath());
 
     }
-
     @ParameterizedTest
     @ValueSource(strings = {"json", "yml"})
     public void testGenerateDifference(String format) throws Exception {
@@ -39,9 +38,11 @@ public final class DifferTest {
         String actualStylish = Differ.generate(absolutePathFile1, absolutePathFile2, "stylish");
         String actualPlain = Differ.generate(absolutePathFile1, absolutePathFile2, "plain");
         String actualJson = Differ.generate(absolutePathFile1, absolutePathFile2, "json");
+        String actualDefault = Differ.generate(absolutePathFile1, absolutePathFile2);
         assertThat(actualStylish).isEqualTo(stylishResult);
         assertThat(actualPlain).isEqualTo(plainResult);
         assertThat(actualJson).isEqualTo(jsonResult);
+        assertThat(actualDefault).isEqualTo(stylishResult);
     }
 
     @Test
@@ -67,4 +68,5 @@ public final class DifferTest {
         );
         Assertions.assertEquals("Unsupported output format: hxlt", thrown.getMessage());
     }
+
 }
