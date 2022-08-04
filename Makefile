@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := build-run
+DEFAULT_GOAL := build-run
 
 clean:
 	./gradlew clean
@@ -6,22 +6,26 @@ clean:
 build:
 	./gradlew clean build
 
-install-dist:
+install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/app/bin/app
+	./build/install/java-package/bin/java-package
 
-lint:
-	./gradlew checkstyleMain
-	./gradlew checkstyleTest
+run:
+	./gradlew run
 
 test:
 	./gradlew test
 
-report: test
+report:
 	./gradlew jacocoTestReport
 
+lint:
+	./gradlew checkstyleMain checkstyleTest
+
+update-deps:
+	./gradlew useLatestVersions
 
 
 build-run: build run
