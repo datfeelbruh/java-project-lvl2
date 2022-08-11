@@ -25,7 +25,6 @@ public class Comparator {
                 valuesStatus.put("newValue", secondValue);
                 valuesStatus.put("modification", DELETED);
                 comparingResult.put(key, valuesStatus);
-
             } else if (!map1.containsKey(key)) {
                 valuesStatus.put("value", firstValue);
                 valuesStatus.put("newValue", secondValue);
