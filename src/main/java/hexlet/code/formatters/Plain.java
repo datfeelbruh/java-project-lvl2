@@ -1,21 +1,23 @@
 package hexlet.code.formatters;
 
 
+import hexlet.code.DiffMap;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.List;
 
 public class Plain {
-    public static String formatting(Map<String, Map<String, Object>> diff) throws Exception {
+    public static String formatting(Map<String, DiffMap> diff) throws Exception {
         Set<String> allKeys = new TreeSet<>(diff.keySet());
         StringBuilder plainBuilder = new StringBuilder();
 
         for (String key : allKeys) {
-            String mod = (String) diff.get(key).get("modification");
+            String mod = diff.get(key).getModification();
             String keyFormatted = "'" + key + "'";
-            String value = getPlainValue(diff.get(key).get("value"));
-            String newValue = getPlainValue(diff.get(key).get("newValue"));
+            String value = getPlainValue(diff.get(key).getValue());
+            String newValue = getPlainValue(diff.get(key).getNewValue());
             switch (mod) {
                 case ("deleted") -> {
                     plainBuilder.append("Property ");

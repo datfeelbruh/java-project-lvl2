@@ -1,20 +1,22 @@
 package hexlet.code.formatters;
 
 
+import hexlet.code.DiffMap;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Stylish {
-    public static String formatting(Map<String, Map<String, Object>> diff) throws Exception {
+    public static String formatting(Map<String, DiffMap> diff) throws Exception {
         Set<String> allKeys = new TreeSet<>(diff.keySet());
         StringBuilder stylishBuilder = new StringBuilder();
         stylishBuilder.append("{\n");
 
         for (String key : allKeys) {
-            Object value = diff.get(key).get("value");
-            Object newValue = diff.get(key).get("newValue");
-            String mod = (String) diff.get(key).get("modification");
+            Object value = diff.get(key).getValue();
+            Object newValue = diff.get(key).getNewValue();
+            String mod = diff.get(key).getModification();
 
             switch (mod) {
                 case ("deleted") -> {

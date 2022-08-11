@@ -16,7 +16,7 @@ public final class Differ {
         String secondFileData = Files.readString(Path.of(secondFile));
         Map<String, Object> firstData = Parser.getFileContent(firstFileData, format1);
         Map<String, Object> secondData = Parser.getFileContent(secondFileData, format2);
-        Map<String, Map<String, Object>> diff = Comparator.genDiff(firstData, secondData);
+        Map<String, DiffMap> diff = Comparator.genDiff(firstData, secondData);
         return Formatter.getOutputFormat(diff, outputFormat);
     }
 }
