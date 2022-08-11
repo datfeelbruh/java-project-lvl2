@@ -10,7 +10,7 @@ install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/java-package/bin/java-package
+	./build/install/app/bin/app
 
 run:
 	./gradlew run
@@ -27,7 +27,13 @@ lint:
 update-deps:
 	./gradlew useLatestVersions
 
+install-dist:
+	./gradlew installDist
 
 build-run: build run
 
 .PHONY: build
+
+
+
+
