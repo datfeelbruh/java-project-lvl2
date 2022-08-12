@@ -5,7 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/49b2d84c54c6081b188c/maintainability)](https://codeclimate.com/github/datfeelbruh/java-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/49b2d84c54c6081b188c/test_coverage)](https://codeclimate.com/github/datfeelbruh/java-project-lvl2/test_coverage)
 
-CLI application for generate diff between two json or yml files.
+CLI application for generate diff between json or yml files.
 
 [![asciicast](https://asciinema.org/a/QDisMdBrx4nbXbYdEV6zvMrHu.svg)](https://asciinema.org/a/QDisMdBrx4nbXbYdEV6zvMrHu)
 
