@@ -51,6 +51,7 @@ Stylish (вывод по умолчанию):
   + setting3: none
 }
 ```
+[![asciicast](https://asciinema.org/a/Dv5qh5tonvEbiELpkz9d9UvKa.svg)](https://asciinema.org/a/Dv5qh5tonvEbiELpkz9d9UvKa)
 Plain:
 ```
 ./build/install/app/bin/app -f plain
@@ -73,10 +74,3 @@ Json:
 ./build/install/app/bin/app -f json
 {"chars1":{"value":["a","b","c"],"newValue":null,"modification":"unchanged"},"chars2":{"value":["d","e","f"],"newValue":false,"modification":"changed"},"checked":{"value":false,"newValue":true,"modification":"changed"},"default":{"value":null,"newValue":["value1","value2"],"modification":"changed"},"id":{"value":45,"newValue":null,"modification":"changed"},"key1":{"value":"value1","newValue":null,"modification":"deleted"},"key2":{"value":null,"newValue":"value2","modification":"added"},"numbers1":{"value":[1,2,3,4],"newValue":null,"modification":"unchanged"},"numbers2":{"value":[2,3,4,5],"newValue":[22,33,44,55],"modification":"changed"},"numbers3":{"value":[3,4,5],"newValue":null,"modification":"deleted"},"numbers4":{"value":null,"newValue":[4,5,6],"modification":"added"},"obj1":{"value":null,"newValue":{"nestedKey":"value","isNested":true},"modification":"added"},"setting1":{"value":"Some value","newValue":"Another value","modification":"changed"},"setting2":{"value":200,"newValue":300,"modification":"changed"},"setting3":{"value":true,"newValue":"none","modification":"changed"}}
 ```
-[![asciicast](https://asciinema.org/a/QDisMdBrx4nbXbYdEV6zvMrHu.svg)](https://asciinema.org/a/QDisMdBrx4nbXbYdEV6zvMrHu)
-
-[![asciicast](https://asciinema.org/a/f659bKwaWLCNFsJBqdONDOe99.svg)](https://asciinema.org/a/f659bKwaWLCNFsJBqdONDOe99)
-
-[![asciicast](https://asciinema.org/a/RPgNBx1hRjD9QTKUzzcQ5QjBl.svg)](https://asciinema.org/a/RPgNBx1hRjD9QTKUzzcQ5QjBl)
-
-[![asciicast](https://asciinema.org/a/TOAs7zMzUqewACq93oHPvj3VO.svg)](https://asciinema.org/a/TOAs7zMzUqewACq93oHPvj3VO)
