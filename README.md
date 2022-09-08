@@ -13,7 +13,7 @@
 ```
 gradlew build
 ```
-### Опции
+## Опции
 Вызов справки:
 ```
 ./build/install/app/bin/app -h
@@ -22,7 +22,7 @@ gradlew build
 ```
 ./build/install/app/bin/app -f
 ```
-####Stylish (вывод по умолчанию):
+###Stylish (вывод по умолчанию):
 ```
 ./build/install/app/bin/app -f stylish
 {
@@ -52,7 +52,7 @@ gradlew build
 }
 ```
 [![asciicast](https://asciinema.org/a/Dv5qh5tonvEbiELpkz9d9UvKa.svg)](https://asciinema.org/a/Dv5qh5tonvEbiELpkz9d9UvKa)
-####Plain:
+###Plain:
 ```
 ./build/install/app/bin/app -f plain
 Property 'chars2' was updated. From [complex value] to false
@@ -70,7 +70,7 @@ Property 'setting2' was updated. From 200 to 300
 Property 'setting3' was updated. From true to 'none'
 ```
 [![asciicast](https://asciinema.org/a/BAz6w7stjmjkSpU3kPzx9gVQq.svg)](https://asciinema.org/a/BAz6w7stjmjkSpU3kPzx9gVQq)
-####Json:
+###Json:
 ```
 ./build/install/app/bin/app -f json
 {"chars1":{"value":["a","b","c"],"newValue":null,"modification":"unchanged"},"chars2":{"value":["d","e","f"],"newValue":false,"modification":"changed"},"checked":{"value":false,"newValue":true,"modification":"changed"},"default":{"value":null,"newValue":["value1","value2"],"modification":"changed"},"id":{"value":45,"newValue":null,"modification":"changed"},"key1":{"value":"value1","newValue":null,"modification":"deleted"},"key2":{"value":null,"newValue":"value2","modification":"added"},"numbers1":{"value":[1,2,3,4],"newValue":null,"modification":"unchanged"},"numbers2":{"value":[2,3,4,5],"newValue":[22,33,44,55],"modification":"changed"},"numbers3":{"value":[3,4,5],"newValue":null,"modification":"deleted"},"numbers4":{"value":null,"newValue":[4,5,6],"modification":"added"},"obj1":{"value":null,"newValue":{"nestedKey":"value","isNested":true},"modification":"added"},"setting1":{"value":"Some value","newValue":"Another value","modification":"changed"},"setting2":{"value":200,"newValue":300,"modification":"changed"},"setting3":{"value":true,"newValue":"none","modification":"changed"}}
